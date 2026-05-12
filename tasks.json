@@ -1,1 +1,17 @@
-[]
+[
+    {
+        "description": "Mop",
+        "completed": false,
+        "priority": "medium"
+    },
+    {
+        "description": "clean room",
+        "completed": false,
+        "priority": "high"
+    },
+    {
+        "description": "dust",
+        "completed": false,
+        "priority": "low"
+    }
+]

@@ -20,7 +20,7 @@ def add_task(tasks, description):
     }
     tasks.append(task)
     save_tasks(tasks)
-    print("Task added successfully")
+    print("Task saved successfully")
 
 def list_tasks(tasks):
     if len(tasks) == 0:
@@ -39,6 +39,25 @@ def complete_task(tasks, index):
     save_tasks(tasks)
     print("Task marked as complete")
 
+def add_task(tasks, description, priority):
+    task = {
+        "description": description,
+        "completed": False,
+        "priority": priority
+    }
+    tasks.append(task)
+    save_tasks(tasks)
+    print("Task saved successfully")
+
+def list_tasks(tasks):
+    if len(tasks) == 0:
+        print("No tasks found.")
+        return
+
+    for i, task in enumerate(tasks):
+        status = "Done" if task["completed"] else "Not Done"
+        print(f"{i+1}. {task['description']} [{status}] (Priority: {task['priority']})")
+
 def delete_task(tasks, index):
     if index < 0 or index >= len(tasks):
         print("Invalid task number")
@@ -55,7 +74,11 @@ def main():
 
         if command == "add":
             desc = input("Enter task description: ")
-            add_task(tasks, desc)
+            priority = input("Enter task priority (low/medium/high): ").strip().lower()
+            if not priority in ["low", "medium", "high"]:
+                print("Invalid priority. Task not added.")
+                continue
+            add_task(tasks, desc, priority)
 
         elif command == "list":
             list_tasks(tasks)
@@ -67,6 +90,9 @@ def main():
         elif command == "delete":
             num = int(input("Enter task number: ")) - 1
             delete_task(tasks, num)
+        
+        elif command == "count":
+            print(f"Total tasks: {len(tasks)}")
 
         elif command == "exit":
             print("Goodbye")
